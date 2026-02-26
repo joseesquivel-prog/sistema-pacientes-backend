@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://ginecologia.com/soap"
+           xmlns:tns="http://ginecologia.com/soap"
+           elementFormDefault="qualified">
+
+    <xs:complexType name="paciente">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="codigoFacil" type="xs:string"/>
+            <xs:element name="nombreCompleto" type="xs:string"/>
+            <xs:element name="dni" type="xs:string"/>
+            <xs:element name="fechaNacimiento" type="xs:date" minOccurs="0"/>
+            <xs:element name="telefono" type="xs:string" minOccurs="0"/>
+            <xs:element name="email" type="xs:string" minOccurs="0"/>
+            <xs:element name="direccion" type="xs:string" minOccurs="0"/>
+            <xs:element name="semanasGestacion" type="xs:int" minOccurs="0"/>
+            <xs:element name="fechaUltimaMenstruacion" type="xs:date" minOccurs="0"/>
+            <xs:element name="alergias" type="xs:string" minOccurs="0"/>
+            <xs:element name="grupoSanguineo" type="xs:string" minOccurs="0"/>
+            <xs:element name="observaciones" type="xs:string" minOccurs="0"/>
+            <xs:element name="fechaRegistro" type="xs:dateTime" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="getPacientePorIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPacientePorIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="paciente" type="tns:paciente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPacientePorCodigoRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPacientePorCodigoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="paciente" type="tns:paciente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPacientePorDniRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="dni" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPacientePorDniResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="paciente" type="tns:paciente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="guardarPacienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="paciente" type="tns:paciente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="guardarPacienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="paciente" type="tns:paciente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getTodosLosPacientesRequest">
+        <xs:complexType/>
+    </xs:element>
+
+    <xs:element name="getTodosLosPacientesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="pacientes" type="tns:paciente" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
