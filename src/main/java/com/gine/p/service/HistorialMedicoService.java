@@ -6,6 +6,7 @@ import com.gine.p.repository.HistorialMedicoRepository;
 import com.gine.p.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -17,11 +18,26 @@ public class HistorialMedicoService {
     @Autowired
     private PacienteRepository pacienteRepository;
 
+    // Con pacienteId en la URL
     public HistorialMedico guardarHistorial(HistorialMedico historial, Long pacienteId) {
         Paciente paciente = pacienteRepository.findById(pacienteId)
                 .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
         historial.setPaciente(paciente);
         return historialRepository.save(historial);
+    }
+
+    // Con paciente dentro del objeto (usado por POST /api/historial)
+    public HistorialMedico guardarHistorial(HistorialMedico historial) {
+        if (historial.getPaciente() != null && historial.getPaciente().getId() != null) {
+            Paciente paciente = pacienteRepository.findById(historial.getPaciente().getId())
+                    .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
+            historial.setPaciente(paciente);
+        }
+        return historialRepository.save(historial);
+    }
+
+    public List<HistorialMedico> obtenerTodoElHistorial() {
+        return historialRepository.findAll();
     }
 
     public List<HistorialMedico> obtenerHistorialPorPaciente(Long pacienteId) {
